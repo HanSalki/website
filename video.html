@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizim Videomuz 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a0000 0%, #4a0000 50%, #8b0000 100%);
+            padding: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(139,0,0,0.6);
+        }
+
+        /* Yerel video için */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* YouTube iframe için */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(139, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            z-index: 20;
+            border: 2px solid rgba(220, 20, 60, 0.5);
+        }
+
+        .back-button:hover {
+            background: rgba(220, 20, 60, 0.6);
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(220,20,60,0.4);
+        }
+
+        .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .placeholder-icon {
+            font-size: 8em;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .placeholder-text {
+            font-size: 1.5em;
+            opacity: 0.8;
+        }
+
+        .instruction {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(139, 0, 0, 0.3);
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instruction h3 {
+            color: #ff4444;
+            margin-bottom: 15px;
+        }
+
+        .instruction ol {
+            text-align: left;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Mobil responsive */
+        @media (max-width: 768px) {
+            .video-wrapper {
+                width: 95%;
+            }
+
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .placeholder-icon {
+                font-size: 5em;
+            }
+
+            .placeholder-text {
+                font-size: 1.2em;
+            }
+
+            .instruction {
+                font-size: 0.9em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Geri dön butonu -->
+        <a href="index.html" class="back-button">← Anılara Dön</a>
+
+        <!-- Video placeholder -->
+        <div class="placeholder" id="placeholder">
+            <div class="placeholder-icon">🎥</div>
+            <div class="placeholder-text">Videonuzu ekleyin</div>
+            
+            <div class="instruction">
+                <h3>📹 Video Ekleme Seçenekleri:</h3>
+                <ol>
+                    <li><strong>YouTube kullanın (ÖNERİLEN):</strong>
+                        <br>• Videoyu YouTube'a "unlisted" olarak yükleyin
+                        <br>• Video linkini bu dosyada değiştirin
+                    </li>
+                    <li><strong>Yerel video (100MB altıysa):</strong>
+                        <br>• video.mp4 dosyasını GitHub'a yükleyin
+                        <br>• Sayfa otomatik çalışacak
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Video wrapper -->
+        <div class="video-wrapper" style="display: none;" id="videoWrapper">
+            
+            <!-- SEÇENEK 1: YouTube Video İçin -->
+            <!-- YouTube video ID'sini buraya yapıştırın -->
+            <!-- Örnek: https://www.youtube.com/watch?v=VIDEO_ID -->
+            <!-- <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe> -->
+
+            <!-- SEÇENEK 2: Yerel Video İçin -->
+            <!-- video.mp4 dosyanız 100MB altındaysa GitHub'a yükleyin -->
+            <video id="myVideo" controls autoplay loop>
+                <source src="video.mp4" type="video/mp4">
+                <source src="video.webm" type="video/webm">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('myVideo');
+        const placeholder = document.getElementById('placeholder');
+        const videoWrapper = document.getElementById('videoWrapper');
+
+        // Video yüklendiğinde placeholder'ı gizle ve videoyu göster
+        video.addEventListener('loadeddata', function() {
+            placeholder.style.display = 'none';
+            videoWrapper.style.display = 'block';
+            
+            // Otomatik başlat
+            video.play().catch(function(error) {
+                console.log('Otomatik oynatma engellendi:', error);
+            });
+        });
+
+        // Video yükleme hatası
+        video.addEventListener('error', function() {
+            // Video yüklenemedi, placeholder göster
+            placeholder.style.display = 'block';
+            videoWrapper.style.display = 'none';
+        });
+
+        // Eğer iframe varsa (YouTube), placeholder'ı gizle
+        window.addEventListener('load', function() {
+            const iframe = document.querySelector('iframe');
+            if (iframe && iframe.src) {
+                placeholder.style.display = 'none';
+                videoWrapper.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
